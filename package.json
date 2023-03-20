@@ -1,0 +1,30 @@
+{
+  "name": "foodie-prog-webapp",
+  "version": "1.0.0",
+  "description": "Foodie Progressive WebApp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js & npm run sass",
+    "sass": "sass --watch source/sass:public/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/casperdennijs/foodie-prog-webapp.git"
+  },
+  "author": "casperdennijs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/casperdennijs/foodie-prog-webapp/issues"
+  },
+  "homepage": "https://github.com/casperdennijs/foodie-prog-webapp#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.2",
+    "sass": "^1.59.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21",
+    "parcel": "^2.8.3"
+  }
+}
