@@ -1,0 +1,14 @@
+<%- include('partials/head'); %>  
+    <%- include('partials/header'); %>
+    <main>
+        <section class="items">
+            <% data.products.forEach(value => { %>
+                <div class="item" id="<%= value._id %>">
+                    <img src="<%= value.image_url %>">
+                    <p><%= value.product_name; %></p>
+                    <button id="<%= value._id %>">Meer info</button>
+                </div>
+            <% }) %>
+        </section>
+    </main>
+<%- include('partials/footer'); %> 
