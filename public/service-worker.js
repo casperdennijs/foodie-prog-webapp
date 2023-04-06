@@ -1,8 +1,8 @@
-const CORE_CACHE_NAME = 'cache-v3';
+const CORE_CACHE_NAME = 'cache-v5';
 const RUNTIME_CACHE_NAME = 'runtime-cache';
 const CORE_ASSETS = [
   '/offline',
-  'css/core.css'
+  '/css/index.css'
 ]
 
 self.addEventListener("install", (event) => {

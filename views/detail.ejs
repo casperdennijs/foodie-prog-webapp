@@ -1,0 +1,11 @@
+<%- include('partials/head'); %>  
+    <%- include('partials/header'); %>
+    <main>
+        <section class="detail">
+            <div class="product" id="<%= data.product._id %>">
+                <img src="<%= data.product.image_url %>">
+                <p><%= data.product.product_name; %></p>
+            </div>
+        </section>
+    </main>
+<%- include('partials/footer'); %> 

@@ -6,7 +6,10 @@
                 <div class="item" id="<%= value._id %>">
                     <img src="<%= value.image_url %>">
                     <p><%= value.product_name; %></p>
-                    <button id="<%= value._id %>">Meer info</button>
+                    <form method="GET" action="/product">
+                        <input type="text" name="id" value="<%= value._id %>" hidden>
+                        <input type="submit" value="Meer info">
+                    </form>
                 </div>
             <% }) %>
         </section>

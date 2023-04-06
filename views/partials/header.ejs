@@ -1,16 +1,11 @@
 <header>
     <div class="header-content">
-        <form method="GET" action="/search"> 
-            <input type="text" name="query" placeholder="Zoek een product op...">
-            <input type="submit" value="">
-        </form>
-        <div class="row">
-            <p class="results"></p>
-            <button class="scanner">Scannen</button>
-        </div>
-        <section class="pagination">
-            <button id="previous" class="page"><</button>
-            <button id="next" class="page">></button>
+        <section class="header-row">
+            <form method="GET" action="/search"> 
+                <input type="text" name="query" placeholder="Zoek een product op...">
+                <input type="submit" value="">
+            </form>
+            <a href="/scanner">Scannen</a>
         </section>
     </div>
 </header>

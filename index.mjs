@@ -40,6 +40,23 @@ app.get('/search', (req, res) => {
         })
 });
 
+app.get('/product', (req, res) => {
+    fetch(`https://nl.openfoodfacts.org/api/v0/product/${req.query.id}.json`)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            res.set('Cache-control', 'public, max-age=31536000')
+            res.render('detail', {
+                data: data
+            });
+        })
+});
+
+app.get('/scanner', (req, res) => {
+    res.render('scanner');
+});
+
 app.get('/offline', (req, res) => {
     res.render('offline');
 });

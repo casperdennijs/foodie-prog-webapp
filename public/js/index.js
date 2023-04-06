@@ -1,60 +1,67 @@
-console.log("Hello World!");
-const CORE_CACHE_NAME = 'cache-v3';
-const RUNTIME_CACHE_NAME = 'runtime-cache';
-const CORE_ASSETS = [
-  '/offline',
-  'css/core.css'
-]
+const scanSection = document.querySelector("section.scannen")
+let cameraStatus = 0;
+let scanInterval;
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CORE_CACHE_NAME)
-      .then(cache => cache.addAll(CORE_ASSETS))
-      .then(() => self.skipWaiting())
-  );
-});
+let formats;
+BarcodeDetector.getSupportedFormats().then((arr => formats = arr));
+const barcodeDetector = new BarcodeDetector({ formats });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then(cacheNames => {
-        return Promise.all(
-          cacheNames.map(cacheName => {
-            if (cacheName !== CORE_CACHE_NAME && cacheName !== RUNTIME_CACHE_NAME) {
-              return caches.delete(cacheName);
+function createVideo() {
+    if (cameraStatus == 0) {
+        const videoElement = document.createElement("video");
+        videoElement.setAttribute("id", "video");
+        videoElement.autoplay = true;
+        scanSection.appendChild(videoElement);
+        scanSection.classList.add("enable");
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            const constraints = { 
+                video: true,
+                audio: false
             }
-          })
-        )
-      })
-  )
-})
-
-self.addEventListener('fetch', (event) => {
-  const path = new URL(event.request.url).pathname
-
-  if (event.request.headers.get('accept').includes('text/html')) {
-    event.respondWith(
-      caches.open(RUNTIME_CACHE_NAME)
-        .then(cache => cache.match(event.request))
-        .then(response => response || fetchAndCache(event.request))
-        .catch(() => caches.open(CORE_CACHE_NAME)
-          .then(cache => cache.match('/offline')))
-    )
-  } else if (CORE_ASSETS.includes(path)) {
-    event.respondWith(
-      caches.open(CORE_CACHE_NAME)
-        .then(cache => cache.match(path))
-    )
-  }
-})
-
-function fetchAndCache(request) {
-  return fetch(request)
-    .then(response => {
-      const clone = response.clone()
-      caches.open(RUNTIME_CACHE_NAME)
-        .then(cache => cache.put(request, clone))
-
-      return response
-    })
+            navigator.mediaDevices.getUserMedia(constraints).then(stream => videoElement.srcObject = stream);
+        }
+        scanInterval = setInterval(scanProducts, 3000)
+        cameraStatus = 1;
+    } else {
+        const video = document.querySelector("#video");
+        const mediaStream = video.srcObject;
+        const tracks = mediaStream.getTracks();
+        tracks.forEach(track => track.stop());
+        scanSection.classList.remove("enable");
+        clearInterval(scanInterval)
+        scanSection.innerHTML = ""
+        cameraStatus = 0;
+    }
 }
+
+function scanProducts() {
+    const video = document.querySelector("#video");
+
+    barcodeDetector
+    .detect(video)
+    .then((barcodes) => {
+        if (barcodes.length == 0) {
+            console.log("No barcode found...")
+        } else {
+            barcodes.forEach((barcode) => {
+                console.log(barcode.rawValue);
+
+                const video = document.querySelector("#video");
+                const mediaStream = video.srcObject;
+                const tracks = mediaStream.getTracks();
+                tracks.forEach(track => track.stop());
+                scanSection.classList.remove("enable");
+                clearInterval(scanInterval)
+                scanSection.innerHTML = ""
+                cameraStatus = 0;
+        
+                window.location.hash = "#product/" + barcode.rawValue;
+            });
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
+
+createVideo();

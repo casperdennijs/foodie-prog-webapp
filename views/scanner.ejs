@@ -1,0 +1,16 @@
+<%- include('partials/head'); %>  
+    <%- include('partials/header'); %>
+    <main>
+        <section class="scannen">
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@undecaf/zbar-wasm@0.9.11/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@undecaf/barcode-detector-polyfill@0.9.13/dist/index.js"></script>
+    <script>
+        try {
+            window['BarcodeDetector'].getSupportedFormats()
+        } catch {
+            window['BarcodeDetector'] = barcodeDetectorPolyfill.BarcodeDetectorPolyfill
+        }
+    </script>
+<%- include('partials/footer'); %> 
