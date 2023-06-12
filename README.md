@@ -1,11 +1,10 @@
 # Foodie Web app
-Dit repository is gemaakt voor mijn opdracht voor Progressive Web Apps.
+Dit repository is gemaakt voor mijn opdracht voor Progressive Web Apps. Ik heb tijdens WAFS een client side applicatie gemaakt met het gebruik van de OpenFood API en deze heb ik tijdens PWA omgezet naar server side.
 
 ## Installeren
 Om de web app te installeren moet je allereerst deze repository clonen. Wanneer je dit gedaan hebt kan je de volgende stappen uitvoeren:
 - Voer ***npm install*** uit om alle (dev)dependecies te downloaden
 - Run ***npm run start*** om de web app op te starten
-
 
 ## Features
 De volgende functionaliteiten zitten in de web app:
@@ -14,10 +13,10 @@ De volgende functionaliteiten zitten in de web app:
 - Elke product heeft zijn eigen detail pagina (bevat alleen geen data verder)
 - Je kan barcodes scannen om bij dat product uit te komen (onvolledig)
 
-## Implementaties
-Hier onder kleine uitleggen van verschillende implementaties die ik heb uitgevoerd in de web app
+## Proces & implementaties
+Hier onder kleine uitleggen van mijn proces en de daarbij verschillende implementaties die ik heb uitgevoerd in de web app
 
-### Routing
+### Routing (Express)
 Ik maak gebruik van Express als server en heb besloten om EJS toe te passen als Templating Engine. Om data te kunnen fetchen via de server heb ik ook gekozen om de package Node-fetch te installeren. En op elke pagina waar data op moet komen voer ik dan ook een fetch uit.
 
 Hieronder zie je mijn code voor al mijn routes:
@@ -69,6 +68,8 @@ app.get('/offline', (req, res) => {
     res.render('offline');
 });
 ```
+
+In Express geef ik elke pagina een header Cache-control mee om ervoor te zorgen dat browser zo lang mogelijk de pagina opslaan in de cache. Dit zorgt ervoor dat de pagina niet elke keer onnodig ingeladen hoeft te worden als deze nog hetzelfde is en daarnaast voor offline toegang als het gecached is.
 
 ### Service Worker & manifest
 Voor de Service Worker heb ik gekozen om de voorbeeld tijdens les te gaan gebruiken en die te bestuderen en te implementeren. Op een paar kleine dingen na werkt caching redelijk prima. Het is wel soms heel willekeurig in wanneer het update en zal momenteel soms geforceerd gedaan moeten worden. Offline pagina's werken wanneer je er voor op ben geweest.
