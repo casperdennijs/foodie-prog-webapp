@@ -71,6 +71,15 @@ app.get('/offline', (req, res) => {
 
 In Express geef ik elke pagina een header Cache-control mee om ervoor te zorgen dat browser zo lang mogelijk de pagina opslaan in de cache. Dit zorgt ervoor dat de pagina niet elke keer onnodig ingeladen hoeft te worden als deze nog hetzelfde is en daarnaast voor offline toegang als het gecached is.
 
+```JS
+app.use(compression());
+```
+
+Deze regel zorgt ervoor dat Express door geeft aan de browser dat alle data die verstuurd compressed wordt en kleiner gemaakt wordt voor de gebruiker.
+
+### Activity Flow Diagram
+![Activity Flow Diagram](https://github.com/casperdennijs/foodie-prog-webapp/assets/56598338/403c8a7d-7bb2-4002-b782-7be2fee97ec8)
+
 ### Service Worker & manifest
 Voor de Service Worker heb ik gekozen om de voorbeeld tijdens les te gaan gebruiken en die te bestuderen en te implementeren. Op een paar kleine dingen na werkt caching redelijk prima. Het is wel soms heel willekeurig in wanneer het update en zal momenteel soms geforceerd gedaan moeten worden. Offline pagina's werken wanneer je er voor op ben geweest.
 
@@ -183,3 +192,25 @@ Dit scoorde mijn web app in een normale omstandigheden (extensies etc aan):
 
 En dit scoorde mijn web app in incognito modus:
 ![Schermafbeelding 2023-04-06 120802](https://user-images.githubusercontent.com/56598338/230356950-b0d5d4ef-4402-4b43-9f54-99dd2416658d.png)
+
+### Conclusie
+Ik heb tijdens deze vak veel gefocused op performance en minder op de werking van de app. Ik heb cache headers toegepast, gewerkt met de service worker en andere technieken zoals Gulp en compressiob toegepast om alles te minifyen en compressen. 
+
+### Deployment
+Voor Deployment heb Vercel gebruikt.
+
+https://foodie-prog-webapp.vercel.app/
+
+### Checklist <a name="checklist"></a>
+- [x] Applicatie overzetten naar NodeJS
+- [x] Express 
+- [x] EJS
+- [x] Fetch werkend maken server side
+- [x] Data tonen met EJS
+- [x] Scanner toevoegen
+- [x] Service worker + manifest.json
+- [x] Page headers (cache-control)
+- [x] Gulp CSS en JS minifying
+- [x] Browser compression
+- [ ] Meer functionaliteiten toevoegen uit WAFS
+- [ ] States beter uitwerken
