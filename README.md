@@ -14,7 +14,7 @@ De volgende functionaliteiten zitten in de web app:
 - Je kan barcodes scannen om bij dat product uit te komen (onvolledig)
 
 ## Proces & implementaties
-Hier onder kleine uitleggen van mijn proces en de daarbij verschillende implementaties die ik heb uitgevoerd in de web app
+Hier onder kleine uitleggen van mijn proces en de daarbij verschillende implementaties die ik heb uitgevoerd in de web app voor de critical render path.
 
 ### Routing (Express)
 Ik maak gebruik van Express als server en heb besloten om EJS toe te passen als Templating Engine. Om data te kunnen fetchen via de server heb ik ook gekozen om de package Node-fetch te installeren. En op elke pagina waar data op moet komen voer ik dan ook een fetch uit.
